@@ -1,0 +1,24 @@
+import cv2
+import os
+import numpy as np
+
+images_path = "C:/Users/icorr/PycharmProjects/Taller3/imagenes"
+files_names = os.listdir(images_path)
+
+newimg_path="C:/Users/icorr/PycharmProjects/Taller3/newimg"
+if not os.path.exists(newimg_path):
+    os.makedirs(newimg_path)
+    print("Directory Created", newimg_path)
+
+count = 0
+for file_name in files_names:
+    image_path= images_path + "/"+file_name
+    print(image_path)
+    image = cv2.imread(image_path)
+    if image is None:
+        continue
+    cv2.imshow("image",image)
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    count += 1
+    cv2.imwrite(newimg_path + "/image" + str(count) + ".jpg", image)
+    cv2.waitKey(0)
